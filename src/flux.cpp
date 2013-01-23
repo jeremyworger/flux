@@ -175,7 +175,7 @@ int main (int argc, char** argv)
 		else swapPixels(trialImage, neighbors, width, height, rng, p2, p1);
 
 		// encode current image and write stats to stdout and file
-		while (sweeps > samplePoints[samples])
+		if (sweeps >= samplePoints[samples])
 		{
 			samples++;
 
