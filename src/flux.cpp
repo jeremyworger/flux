@@ -45,7 +45,6 @@ int main (int argc, char** argv)
 	long steps = 0;						// trial iteration counter
 	long nAccepted = 0;					// number of accepted trials
 	unsigned int samples = 0;			// number of samples
-	unsigned int j,k;					// extra variables for inner loops
 
 	// file name buffers
 	ostringstream targetFileName;		// file name of target image
@@ -69,7 +68,7 @@ int main (int argc, char** argv)
 	unsigned int p1, p2;
 
 	// Monte Carlo sweeps
-	double sweeps;
+	double sweeps = 0;
 
 	// random number generator
 	MTRand rng;
