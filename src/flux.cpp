@@ -53,7 +53,7 @@ int main (int argc, char** argv)
 	// defaults
 	long mcSweeps = 10000;				// total number of MC sweeps
 	unsigned int frames = 1000;			// number of images to sample
-	double temperature = 10;			// temperature of thermal bath
+	double temperature = 0.1;			// temperature of thermal bath
 	bool isLogarithmic = false;			// whether sampling is performed at logarithmic intervals
 	bool isReverse = false;				// whether running in reverse mode (dissolve image)
 	bool isMonitor = false;				// whether to monitor acceptance statistics
@@ -120,6 +120,9 @@ int main (int argc, char** argv)
 	// decode target image from file
 	decodeImage(targetFileName, targetImage, width, height);
 
+	// set total number of pixels in canvas
+	unsigned int pixels = width*height;
+
 	// generate neigbor list
 	vector <vector <unsigned int> > neighbors(width*height, vector <unsigned int> (4));
 	computeNeighbors(neighbors, width, height);
@@ -129,6 +132,14 @@ int main (int argc, char** argv)
 
 	trialImage = targetImage;
 	if (!isReverse) randomizeImage(trialImage, rng, width, height);
+
+	// compute current distance from target
+	double error = 0;
+
+	for (unsigned int i=0;i<width*height;i++)
+	{
+		error += computePixelValue(trialImage, targetImage, i, i);
+	}
 
 	cout << "Starting image generation..." << endl;
 
@@ -170,7 +181,11 @@ int main (int argc, char** argv)
 		}
 
 		// copy pixels from trial to current image if accepted, do the opposite if rejected
-		if (isAccepted) nAccepted++;
+		if (isAccepted)
+		{
+			nAccepted++;
+			error += pixelValueChange;
+		}
 		else swapPixels(trialImage, neighbors, width, height, rng, p2, p1);
 
 		// encode current image and write stats to stdout and file
@@ -179,14 +194,14 @@ int main (int argc, char** argv)
 			samples++;
 
 			// write to stdout
-			printf("Frame: %4d, acceptance: %5.4f\n", samples, ((double) nAccepted/steps));
+			printf("Frame: %4d, error: %5.4f, acceptance: %5.4f\n", samples, error/pixels, ((double) nAccepted/steps));
 
 			// write acceptance statistics to file
 			if (isMonitor)
 			{
 				// write to log file
 				pFile = fopen(fileName.str().c_str(), "a");
-				fprintf(pFile, "%d %5.4f\n", samples, ((double) nAccepted/steps));
+				fprintf(pFile, "%d %5.4f %5.4f\n", samples, error/pixels, ((double) nAccepted/steps));
 				fclose(pFile);
 			}
 
@@ -395,14 +410,15 @@ double computePixelValue(vector <unsigned char> &image, vector <unsigned char> &
 {
 	double m1 = 0;
 	double m2 = 0;
+	double norm = 255*255;
 
 	for (unsigned int i=0;i<4;i++)
 	{
-		m1 += (int(image[4 * p1 + i]) - int(target[4 * p1 + i])) * (int(image[4 * p1 + i]) - int(target[4 * p1 + i]));
-		m2 += (int(image[4 * p2 + i]) - int(target[4 * p2 + i])) * (int(image[4 * p2 + i]) - int(target[4 * p2 + i]));
+		m1 += (int(image[4 * p1 + i]) - int(target[4 * p1 + i])) * (int(image[4 * p1 + i]) - int(target[4 * p1 + i]))/norm;
+		m2 += (int(image[4 * p2 + i]) - int(target[4 * p2 + i])) * (int(image[4 * p2 + i]) - int(target[4 * p2 + i]))/norm;
 	}
 
-	return (sqrt(m1) + sqrt(m2));
+	return (sqrt(m1) + sqrt(m2))/4.0;
 }
 
 // Randomize pixels
