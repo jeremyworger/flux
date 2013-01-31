@@ -1,5 +1,5 @@
 
-FLUX(1)								       FLUX(1)
+FLUX(1) 							       FLUX(1)
 
 
 
@@ -11,29 +11,29 @@ SYNOPSIS
        flux [IMAGE] [options]
 
 DESCRIPTION
-       Flux  is	 a command-line tool that uses a Monte Carlo (MC) algorithm to
-       converge towards a target image using  a	 random	 sequence  of  nearest
-       neighbor	 pixel	swaps.	 Images produced by flux resemble iron filings
+       Flux  is  a command-line tool that uses a Monte Carlo (MC) algorithm to
+       converge towards a target image using  a  random  sequence  of  nearest
+       neighbor  pixel	swaps.	 Images produced by flux resemble iron filings
        manipulated by a magnetic field.
 
        Flux works by repeatedly attempting to swap the RGBA (red, green, blue,
-       alphpa)	values of two adjacent pixels. The algorithm computes the dif‐
+       alphpa)	values of two adjacent pixels. The algorithm computes the dif-
        ference in the magnitude of the two RGBA pixel vectors compared to  the
-       same  vector  in	 the  target image before and after the trial move and
+       same  vector  in  the  target image before and after the trial move and
        accepts the move according to a Boltzmann factor. The system is coupled
        to  a  thermal bath which allows the user to control the probability of
        accepting moves that take the image away from the target, thus allowing
        the rate of convergence to be tuned.
 
        Flux avoids unneccessary dependency on zlib and libpng by using LodePNG
-       to decode and encode PNG images.	 MersenneTwister is  used  to  provide
+       to decode and encode PNG images.  MersenneTwister is  used  to  provide
        high quality and efficient random numbers.
 
        Flux  must  be passed at least one command-line argument, the path of a
        PNG .  Flux creates an initial canvas by randomizing the pixels of  the
        target  image.  As the algorithm progresses flux will output a sequence
        of images showing the evolution of the the canvas.   In	addition,  the
-       current acceptance rate is printed to stdout allowing the user to moni‐
+       current acceptance rate is printed to stdout allowing the user to moni-
        tor the rate of convergence.
 
        Flux is trivially parellelizable, MPI  support  will  follow  (allowing
@@ -46,36 +46,37 @@ OPTIONS
        -h, --help
 	      Print the help message.  LATUXIT_EDITOR.
 
-       -s INT, --sweeps INT
-	      Where INT is an integer specifying the number of MC sweeps.  One
-	      sweep  equals,  on average, one trial move per pixel, i.e. there
-	      are width x height iterations per sweep.
+       -i INT, --iterations INT
+	      Where INT is an integer specifying  the  number  of  iterations.
+	      Iterations  are  measured  in units of Monte Carlo sweeps, where
+	      one sweep equals, on average, one trial  move  per  pixel,  i.e.
+	      there are width x height iterations per sweep.
 
        -f INT, --frames INT
-	      Where INT is an integer specifying the number of	frames	to  be
+	      Where  INT  is  an integer specifying the number of frames to be
 	      saved.
 
        -t DOUBLE, --temperature DOUBLE
-	      Specify  the  temperature of the thermal bath. A higher tempera‐
-	      ture will mean that more trial moves are accepted. At zero  tem‐
-	      perature,	 only  moves that take the canvas closer to the target
-	      will be accepted (comparable to a hill climbing algorithm). Tem‐
-	      perature	adds  noise  to the system and can be used to tune the
+	      Specify the temperature of the thermal bath. A  higher  tempera-
+	      ture  will mean that more trial moves are accepted. At zero tem-
+	      perature, only moves that take the canvas closer to  the	target
+	      will be accepted (comparable to a hill climbing algorithm). Tem-
+	      perature adds noise to the system and can be used  to  tune  the
 	      rate of convergence as well as the style of image produced.
 
        -l, --log
 	      Use logarithmic spacing for sampling points. This is useful when
-	      convergence  is  very  slow.   -r, --reverse Run flux in reverse
-	      mode. Start from the target  image  and  evolve  to  a  disorded
+	      convergence is very slow.  -r, --reverse	Run  flux  in  reverse
+	      mode.  Start  from  the  target  image  and evolve to a disorded
 	      state.
 
        -d DIRECTORY, --directory DIRECTORY
-	      Specify  a  directory for the output files.  DIRECTORY should be
-	      in the working directory and  will  be  created  if  it  doesn't
+	      Specify a directory for the output files.  DIRECTORY  should  be
+	      in  the  working	directory  and	will  be created if it doesn't
 	      already exist.
 
        -m, --monitor
-	      Turn on acceptance monitoring. If set, flux will monitor statis‐
+	      Turn on acceptance monitoring. If set, flux will monitor statis-
 	      tics for the acceptance rate and write data to log.txt
 
 DEFAULTS

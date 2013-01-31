@@ -227,7 +227,7 @@ void printHelpMessage()
 
 	     "Available options:\n"
 	     " -h/--help                 : Print this help information\n"
-	     " -s/--sweeps <int>         : Number of MC sweeps\n"
+	     " -i/--iterations <int>     : Number of iterations (MC sweeps)\n"
 	     " -f/--frames <int>         : Number of frames to encode\n"
 	     " -t/--temperature <double> : Temperature of thermal bath\n"
 	     " -l/--log                  : Sample at logarithmic intervals\n"
@@ -267,7 +267,7 @@ void parseCommandLineArguments(int argc, char **argv, ostringstream &targetFileN
 
 		while (i < argc)
 		{
-			if(strcmp(argv[i],"-s") == 0 || strcmp(argv[i],"--sweeps") == 0)
+			if(strcmp(argv[i],"-i") == 0 || strcmp(argv[i],"--iterations") == 0)
 			{
 				i++;
 				sweeps = atoi(argv[i]);

@@ -81,12 +81,12 @@ with no options will print a help message.
 Print the help message.
 .BR LATUXIT_EDITOR .
 .TP
-.BI \-s " INT" "\fR,\fP \-\^\-sweeps "INT
+.BI \-i " INT" "\fR,\fP \-\^\-iterations "INT
 Where
 .I INT
-is an integer specifying the number of MC sweeps. One sweep equals, on
-average, one trial move per pixel, i.e. there are width x height iterations
-per sweep.
+is an integer specifying the number of iterations. Iterations are measured in
+units of Monte Carlo sweeps, where one sweep equals, on average, one trial move
+per pixel, i.e. there are width x height iterations per sweep.
 .TP
 .BI \-f " INT" "\fR,\fP \-\^\-frames "INT
 Where
