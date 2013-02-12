@@ -37,7 +37,7 @@ DESCRIPTION
        tor the rate of convergence.
 
        Flux is trivially parellelizable, MPI  support  will  follow  (allowing
-       effecient processing of very large images).
+       efficient processing of very large images).
 
 OPTIONS
        flux  supports the following short- and long-form command-line options.
