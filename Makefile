@@ -26,7 +26,7 @@ install:
 	$(INSTALL) $(IFLAGS_EXEC) src/flux $(PREFIX)/bin
 	$(INSTALL) $(IFLAGS) man/flux.1 $(PREFIX)/man/man1
 
-# Uninstall the executable, man page, and shared library
+# Uninstall the executable and man page
 uninstall:
 	rm -f $(PREFIX)/bin/flux
 	rm -f $(PREFIX)/man/man1/flux.1
