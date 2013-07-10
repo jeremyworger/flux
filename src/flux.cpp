@@ -323,7 +323,7 @@ void parseCommandLineArguments(int argc, char **argv, ostringstream &targetFileN
 			else
 			{
 				cerr << "Error: unknown command-line parameter " << argv[i] << endl;
-				cerr << "Run: for help run \"flux -h\"" << endl;
+				cerr << "For help run \"flux -h\"" << endl;
 				exit(1);
 			}
 
