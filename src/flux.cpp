@@ -42,21 +42,21 @@ void computeNeighbors(vector <vector <unsigned int> >&, unsigned int&, unsigned 
 int main (int argc, char** argv)
 {
 	// counters
-	long steps = 0;						// trial iteration counter
-	long nAccepted = 0;					// number of accepted trials
-	unsigned int samples = 0;			// number of samples
+	long steps = 0;                     // trial iteration counter
+	long nAccepted = 0;                 // number of accepted trials
+	unsigned int samples = 0;           // number of samples
 
 	// file name buffers
-	ostringstream targetFileName;		// file name of target image
-	ostringstream startingFileName;		// file name of starting image
+	ostringstream targetFileName;       // file name of target image
+	ostringstream startingFileName;     // file name of starting image
 
 	// defaults
-	long mcSweeps = 10000;				// total number of MC sweeps
-	unsigned int frames = 1000;			// number of images to sample
-	double temperature = 0.1;			// temperature of thermal bath
-	bool isLogarithmic = false;			// whether sampling is performed at logarithmic intervals
-	bool isReverse = false;				// whether running in reverse mode (dissolve image)
-	bool isMonitor = false;				// whether to monitor acceptance statistics
+	long mcSweeps = 10000;              // total number of MC sweeps
+	unsigned int frames = 1000;         // number of images to sample
+	double temperature = 0.1;           // temperature of thermal bath
+	bool isLogarithmic = false;         // whether sampling is performed at logarithmic intervals
+	bool isReverse = false;             // whether running in reverse mode (dissolve image)
+	bool isMonitor = false;             // whether to monitor acceptance statistics
 
 	// absoulte pixel value of image block before and after trial
 	double currentPixelValue, trialPixelValue, pixelValueChange;
@@ -217,7 +217,7 @@ int main (int argc, char** argv)
 }
 // END MAIN FUNCTION
 
-// FUNCTION DEFINITIONS
+// FUNCTION DECLARATIONS
 
 // Print help message to stdout
 void printHelpMessage()
