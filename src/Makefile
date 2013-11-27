@@ -9,7 +9,7 @@ include ../config.mk
 
 all: flux
 
-flux: lodepng.cpp flux.cpp
+flux: lodepng.h lodepng.cpp flux.cpp
 	$(CXX) $(CXXFLAGS) lodepng.cpp flux.cpp -o flux
 
 clean:
