@@ -33,7 +33,7 @@ Images produced by
 resemble iron filings manipulated by a magnetic field.
 .PP
 .B Flux
-works by repeatedly attempting to swap the RGBA (red, green, blue, alphpa)
+works by repeatedly attempting to swap the RGBA (red, green, blue, alpha)
 values of two adjacent pixels. The algorithm computes the difference in the
 magnitude of the two RGBA pixel vectors compared to the same vector in the
 target image before and after the trial move and accepts the move according
@@ -56,7 +56,8 @@ is used to provide high quality and efficient random numbers.
 .PP
 .B Flux
 must be passed at least one command-line argument, the path of a
-.B PNG .
+.B PNG 
+image.
 .B Flux
 creates an initial canvas by randomizing the pixels of the target
 image. As the algorithm progresses
@@ -102,6 +103,7 @@ to tune the rate of convergence as well as the style of image produced.
 .BR \-l ", " \-\^\-log
 Use logarithmic spacing for sampling points. This is useful when convergence
 is very slow.
+.TP
 .BR \-r ", " \-\^\-reverse
 Run
 .B flux
